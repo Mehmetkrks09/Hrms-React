@@ -1,5 +1,5 @@
-import React from 'react'
-import React,{useState,useEffect} from "react"
+import React, { useState, useEffect } from "react";
+import { Table,  Icon,Menu} from "semantic-ui-react";
 import EmployerService from '../Services/employerService'
 
 export default function EmployerList() {
@@ -9,7 +9,7 @@ export default function EmployerList() {
     useEffect(()=>{
         let employerService = new EmployerService()
         employerService.getEmployeer().then(result=>setEmloyer(result.data.data))     
-    })
+      },[])
     
       return (
         <div>

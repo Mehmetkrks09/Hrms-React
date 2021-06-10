@@ -1,5 +1,5 @@
-import React from 'react'
-import React,{useState,useEffect} from "react"
+import React, { useState, useEffect } from "react";
+import { Table,  Icon,Menu} from "semantic-ui-react";
 import JobAdvertisementService from '../Services/jobAdvertisementService'
 
 
@@ -10,7 +10,7 @@ export default function JobAdvertisement() {
     useEffect(()=>{
        let jobAdvertisementService=new JobAdvertisementService()
        jobAdvertisementService.getAllJobAdvertisement.then(result=>setJobAdvertisement(result.data.data))     
-    })
+      },[])
     
       return (
         <div>

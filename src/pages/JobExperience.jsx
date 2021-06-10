@@ -1,4 +1,5 @@
-import React,{useState,useEffect} from "react"
+import React, { useState, useEffect } from "react";
+import { Table,  Icon,Menu} from "semantic-ui-react";
 import JobExperienceService from "../Services/jobExperienceService"
 
   const [jobExperiences, setJobExperience] = useState([])
@@ -7,7 +8,7 @@ import JobExperienceService from "../Services/jobExperienceService"
   useEffect(()=>{
      let jobExperienceService=new JobExperienceService()
      jobExperienceService.getByGrudutionYear.then(result=>setJobExperience(result.data.data))     
-  })
+    },[])
   
     return (
       <div>
