@@ -3,7 +3,7 @@ import { Table,  Icon,Menu} from "semantic-ui-react";
 import JobAdvertisementService from '../Services/jobAdvertisementService'
 
 
-export default function JobAdvertisement() {
+export default function JobAdvertisementList() {
     const [jobAdvertisements, setJobAdvertisement] = useState([])
 
 

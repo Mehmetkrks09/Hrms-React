@@ -3,11 +3,16 @@ import React from "react";
 import Categories from "./Categories";
 
 import { Grid, GridRow } from "semantic-ui-react";
-import EmployerList from "../pages/EmployerList";
+
 import JobSeeker from "../pages/JobSeekerList";
 import { Route } from "react-router";
 import JobSeekerDetail from "../pages/JobSeekerDetail";
 import CartDetail from "../pages/CartDetail";
+
+import JobAd from "../pages/JobAd";
+
+
+
 
 
 export default function Dashboard() {
@@ -20,6 +25,7 @@ export default function Dashboard() {
           
           </Grid.Column>
           <Grid.Column width={12}>
+          <Route exact path={"/jobAdd"} component={JobAd} /> 
           <Route exact path ="/" component={JobSeeker}/>
           <Route exact path ="/jobSeeker" component={JobSeeker}/>
           <Route exact path ="/jobSeeker/:id" component={JobSeekerDetail}/>

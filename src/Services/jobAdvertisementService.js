@@ -4,9 +4,10 @@ export default class JobAdvertisementService {
   getAllJobAdvertisement() {
     return axios.get("http://localhost:8080/api/jobadvertisement/getall");
   }
-  postJobAdvertisement() {
-    return axios.post("http://localhost:8080/api/jobadvertisement/add");
+  add(values) {
+    return axios.post("http://localhost:8080/api/jobadvertisement/add",values)
   }
+
   getAllByEmployer(id) {
     return axios.get(
       "http://localhost:8080/api/jobadvertisement/getAllByEmployer?employerId=" +
@@ -25,4 +26,5 @@ export default class JobAdvertisementService {
       "http://localhost:8080/api/jobadvertisement/getByIsActiveTrue"
     );
   }
+  
 }
