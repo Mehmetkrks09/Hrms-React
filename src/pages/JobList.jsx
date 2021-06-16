@@ -27,10 +27,10 @@ export default function JobList() {
             <Table.Body>
           
           
-                  {employers.map((jobs)=>
+                  {jobs.map((jobs)=>
                   (
-                    <Table.Row key={employers.id}>
-                    <Table.Cell>{employers.jobName }</Table.Cell>
+                    <Table.Row key={jobs.id}>
+                    <Table.Cell>{jobs.jobName }</Table.Cell>
                     
                  
                    

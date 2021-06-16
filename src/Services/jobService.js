@@ -8,6 +8,6 @@ getJobs(){
 
 postJob(){
     return axios.post("http://localhost:8080/api/jobs/add")
-}
+}  
 
 }

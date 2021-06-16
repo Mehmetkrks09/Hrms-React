@@ -1,5 +1,5 @@
 import axios from "axios";
-export default class WaysOfWork{
+export default class WaysOfWorkService{
 
 add(){
     return axios.post("http://localhost:8080/api/wayOfWorking/add")

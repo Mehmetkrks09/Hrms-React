@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button,Menu } from 'semantic-ui-react'
-import { NavLink } from "react-router-dom";
+
 export default function SignedOut(props) {
     return (
         <div>

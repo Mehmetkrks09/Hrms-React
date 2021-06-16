@@ -1,5 +1,5 @@
 import axios from "axios";
-export default class WorkingTime{
+export default class WorkingTimeService{
 
 add(){
     return axios.post("http://localhost:8080/api/workingTime/add")
@@ -9,4 +9,4 @@ getAll(){
 }
 
 
-}
+}  

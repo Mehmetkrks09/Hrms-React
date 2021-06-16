@@ -9,7 +9,7 @@ export default function JobAdvertisementList() {
 
     useEffect(()=>{
        let jobAdvertisementService=new JobAdvertisementService()
-       jobAdvertisementService.getAllJobAdvertisement.then(result=>setJobAdvertisement(result.data.data))     
+       jobAdvertisementService.getAllJobAdvertisement().then(result=>setJobAdvertisement(result.data.data))     
       },[])
     
       return (
@@ -19,8 +19,7 @@ export default function JobAdvertisementList() {
           <Table celled>
             <Table.Header>
               <Table.Row>
-              <Table.HeaderCell>companyName </Table.HeaderCell>
-              <Table.HeaderCell>webAddress</Table.HeaderCell>
+              
                 <Table.HeaderCell>Min Salary</Table.HeaderCell>
                 <Table.HeaderCell>Max Salary</Table.HeaderCell>
                 
@@ -36,12 +35,10 @@ export default function JobAdvertisementList() {
             <Table.Body>
           
           
-                  {employers.map((jobAdvertisements)=>
+                  {jobAdvertisements.map((jobAdvertisements)=>
                   (
                     <Table.Row key={jobAdvertisements.id}>
-                    <Table.Cell>{jobAdvertisements.companyName }</Table.Cell>
-                    <Table.Cell>{jobAdvertisements.webAddress}</Table.Cell>
-                  
+                    
                     <Table.Cell>{jobAdvertisements.minSalary}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.maxSalary}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.description}</Table.Cell>
