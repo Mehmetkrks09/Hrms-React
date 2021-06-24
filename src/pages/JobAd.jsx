@@ -21,11 +21,11 @@ export default function JobAd() {
     
     deadline: Yup.date().nullable().required("Bu alanın doldurulması zorunludur"),
     description: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    jobJobId: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    // workingTimeId: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    // jobId: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    workingTimeId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     wayOfWorkingId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     numberOfOpenPositions: Yup.string().required("Posizyon sayısı zorunludur").min(1,"Posizyon sayısı 1 den küçük olamaz"),
-    cityCityId: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    cityId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     minSalary: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur"),
     maxSalary: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur")
   });
@@ -34,11 +34,11 @@ export default function JobAd() {
   const formik = useFormik({
     initialValues: {
       description: "",
-      jobJobId: "",
+      jobId: "",
       workingTimeId: "",
       wayOfWorkingId: "",
       numberOfOpenPositions: "",
-      cityCityId: "",
+      cityId: "",
       minSalary: "",
       maxSalary: "",
       employerId:"",
@@ -49,9 +49,10 @@ export default function JobAd() {
       values.employerId = 3;
       jobAdService.add(values).then((result) => console.log(result.data.data));
       alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+      console.log(values)
       // history.push("/jobads");
       
-    },
+    }
   });
 
   const [workTimes, setWorkTimes] = useState([]);
@@ -84,7 +85,7 @@ export default function JobAd() {
   const cityOption = cities.map((city, index) => ({
     key: index,
     text: city.cityName,
-    value: city.cityId,
+    value: city.id,
   }));
   const jobPositionOption = jobPositions.map((jobPosition, index) => ({
     key: index,
@@ -111,16 +112,16 @@ export default function JobAd() {
           search
           selection
           onChange={(event, data) =>
-            handleChangeSemantic(data.value, "jobJobId")
+            handleChangeSemantic(data.value, "jobId")
           }
           onBlur={formik.onBlur}
-          id="jobJobId"
-          value={formik.values.jobJobId}
+          id="jobId"
+          value={formik.values.jobId}
           options={jobPositionOption}
           />
-          {formik.errors.jobJobId && formik.touched.jobJobId &&(
+          {formik.errors.jobId && formik.touched.jobId &&(
             <div className={"ui pointing red basic label"}>
-              {formik.errors.jobJobId}
+              {formik.errors.jobId}
             </div>
           )}
           </Form.Field>
@@ -134,16 +135,16 @@ export default function JobAd() {
               search
               selection
               onChange={(event, data) =>
-                handleChangeSemantic(data.value, "cityCityId")
+                handleChangeSemantic(data.value, "cityId")
               }
               onBlur={formik.onBlur}
-              id="cityCityId"
-              value={formik.values.cityCityId}
+              id="cityId"
+              value={formik.values.cityId}
               options={cityOption}
             />
-            {formik.errors.cityCityId && formik.touched.cityCityId && (
+            {formik.errors.cityId && formik.touched.cityId && (
               <div className={"ui pointing red basic label"}>
-                {formik.errors.cityCityId}
+                {formik.errors.cityId}
               </div>
             )}
           </Form.Field>
@@ -179,15 +180,15 @@ export default function JobAd() {
                   search
                   selection
                   onChange={(event, data) =>
-                    handleChangeSemantic(data.value, "workTimeId")
+                    handleChangeSemantic(data.value, "workingTimeId")
                   }
                   onBlur={formik.onBlur}
-                  id="workTimeId"
-                  value={formik.values.workTimeId}
+                  id="workingTimeId"
+                  value={formik.values.workingTimeId}
                   options={workTimeOption}
                 />
-                {formik.errors.workTimeId && formik.touched.workTimeId && (
-                  <div className={"ui pointing red basic label"}>{formik.errors.workTimeId}</div>
+                {formik.errors.workingTimeId && formik.touched.workingTimeId && (
+                  <div className={"ui pointing red basic label"}>{formik.errors.workingTimeId}</div>
                 )}
               </Form.Field>
               <Form.Field>

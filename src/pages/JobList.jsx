@@ -8,7 +8,7 @@ export default function JobList() {
 
     useEffect(()=>{
        let jobService = new JobService()
-       jobService.getJobs.then(result=>setJob(result.data.data))     
+       jobService.getJobs().then(result=>setJob(result.data.data))     
       },[])
     
       return (
