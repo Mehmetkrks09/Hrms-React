@@ -26,8 +26,8 @@ export default function JobAd() {
     wayOfWorkingId: Yup.string().required("Bu alanın doldurulması zorunludur"),
     numberOfOpenPositions: Yup.string().required("Posizyon sayısı zorunludur").min(1,"Posizyon sayısı 1 den küçük olamaz"),
     cityId: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    minSalary: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur"),
-    maxSalary: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur")
+    salaryMin: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur"),
+    salaryMax: Yup.number().min(0,"0 Dan az olamaz").required("Bu alan zorunludur")
   });
 
 
@@ -39,14 +39,14 @@ export default function JobAd() {
       wayOfWorkingId: "",
       numberOfOpenPositions: "",
       cityId: "",
-      minSalary: "",
-      maxSalary: "",
+      salaryMin: "",
+      salaryMax: "",
       employerId:"",
       deadline:"",
     },
     validationSchema: JobAdvertAddSchema,
     onSubmit: (values) => {
-      values.employerId = 3;
+      values.employerId =4 ;
       jobAdService.add(values).then((result) => console.log(result.data.data));
       alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
       console.log(values)
@@ -199,15 +199,15 @@ export default function JobAd() {
                   style={{ width: "100%" }}
                   type="number"
                   placeholder="Maaş aralığı MİNİMUM"
-                  value={formik.values.minSalary}
-                  name="minSalary"
+                  value={formik.values.salaryMin}
+                  name="salaryMin"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 >
                 </Input>
-                {formik.errors.minSalary && formik.touched.minSalary && (
+                {formik.errors.salaryMin && formik.touched.salaryMin && (
                   <div className={"ui pointing red basic label"}>
-                    {formik.errors.minSalary}
+                    {formik.errors.salaryMin}
                   </div>
                 )}
                 </Grid.Column>
@@ -217,15 +217,15 @@ export default function JobAd() {
                   style={{ width: "100%" }}
                   type="number"
                   placeholder="Maaş aralığı MAKSİMUM"
-                  value={formik.values.maxSalary}
-                  name="maxSalary"
+                  value={formik.values.salaryMax}
+                  name="salaryMax"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 >
                 </Input>
-                {formik.errors.maxSalary && formik.touched.maxSalary && (
+                {formik.errors.salaryMax && formik.touched.salaryMax && (
                   <div className={"ui pointing red basic label"}>
-                    {formik.errors.maxSalary}
+                    {formik.errors.salaryMax}
                   </div>
                 )}
                 </Grid.Column>
