@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Table,  Icon,Menu} from "semantic-ui-react";
+import EmployeeService from "../Services/EmployeeService";
 
 export default function EmployeeList() {
     const [employers, setEmloyer] = useState([])
 
 
     useEffect(()=>{
-        let employerService = new EmployerService()
+       
         employerService.getEmployeer().then(result=>setEmloyer(result.data.data))     
     },[])
     

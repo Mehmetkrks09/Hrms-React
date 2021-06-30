@@ -12,6 +12,9 @@ import CartDetail from "../pages/CartDetail";
 import JobList from "../pages/JobList";
 import JobAdvertisementList from "../pages/JobAdvertisementList";
 import JobAd from "../pages/JobAd";
+import CvUpdate from "../pages/CvUpdate";
+import CvAdd from "../pages/CvAdd";
+import EmployeeInfoUpdate from "../pages/EmployeeInfoUpdate";
 
 export default function Dashboard() {
   return (
@@ -27,6 +30,9 @@ export default function Dashboard() {
               path={"/jobAdvertisementList"}
               component={JobAdvertisementList}
             />
+
+            <Route exact path={"/cvAdd"} component={CvAdd} />
+            <Route exact path={"/cvUpdate"} component={CvUpdate} />
             <Route exact path={"/jobList"} component={JobList} />
             <Route exact path={"/jobAdd"} component={JobAd} />
             <Route exact path="/" component={JobSeeker} />

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table,  Icon,Menu} from "semantic-ui-react";
+import EmployeeService from "../Services/EmployeeService";
 import JobService from '../Services/jobService';
 
 export default function JobList() {
@@ -7,14 +8,15 @@ export default function JobList() {
 
 
     useEffect(()=>{
+      
        let jobService = new JobService()
        jobService.getJobs().then(result=>setJob(result.data.data))     
-      },[])
+      },[])                                 
     
       return (
         <div>
  
-          <Table celled>
+          <Table celled>  
             <Table.Header>
               <Table.Row>
             

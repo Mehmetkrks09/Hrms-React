@@ -9,4 +9,8 @@ export default class SchoolService{
     getByGrudutionYear(){
         return axios.get("http://localhost:8080/api/cv/school/ByGrudutionYear")
     }
-}
+
+    getAll(){
+        return axios.get("http://localhost:8080/api/cv/school/getAll")
+    }
+}  

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-export default class Department{
+export default class DepartmentService{
 
 
 getDepartment(){
