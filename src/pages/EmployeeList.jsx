@@ -2,13 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Table,  Icon,Menu} from "semantic-ui-react";
 import EmployeeService from "../Services/EmployeeService";
 
-export default function EmployeeList() {
-    const [employers, setEmloyer] = useState([])
 
+
+export default function EmployeeList() {
+    const [employees, setEmployee] = useState([])
+
+
+    let employeeService=new EmployeeService();
 
     useEffect(()=>{
        
-        employerService.getEmployeer().then(result=>setEmloyer(result.data.data))     
+        employeeService.getAllEmployeee().then(result=>setEmployee(result.data.data))     
     },[])
     
       return (
@@ -18,12 +22,10 @@ export default function EmployeeList() {
             <Table.Header>
               <Table.Row>
                 <Table.HeaderCell>Email</Table.HeaderCell>
-                <Table.HeaderCell>password</Table.HeaderCell>
+                <Table.HeaderCell>PasswORD</Table.HeaderCell>
                 
-                <Table.HeaderCell>CreatedOne</Table.HeaderCell>
-                <Table.HeaderCell>companyName</Table.HeaderCell>
-                <Table.HeaderCell>phoneNumber</Table.HeaderCell>
-                <Table.HeaderCell>webAddress</Table.HeaderCell>
+                <Table.HeaderCell>first Name</Table.HeaderCell>
+                <Table.HeaderCell>last <Name></Name></Table.HeaderCell>
                
               
               </Table.Row>
@@ -32,16 +34,14 @@ export default function EmployeeList() {
             <Table.Body>
           
           
-                  {employers.map((employers)=>
+                  {employees.map((employees)=>
                   (
-                    <Table.Row key={employers.id}>
-                    <Table.Cell>{employers.email }</Table.Cell>
-                    <Table.Cell>{employers.password}</Table.Cell>
-                  
-                    <Table.Cell>{employers.createdOn}</Table.Cell>
-                    <Table.Cell>{employers.companyName}</Table.Cell>
-                    <Table.Cell>{employers.phoneNumber}</Table.Cell>
-                    <Table.Cell>{employers.webAddress}</Table.Cell>
+                    <Table.Row key={employees.id}>
+                    <Table.Cell>{employees.email }</Table.Cell>
+                    <Table.Cell>{employees.password}</Table.Cell>
+                    <Table.Cell>{employees.firstName}</Table.Cell>
+                    <Table.Cell>{employees.lastName}</Table.Cell>
+                    
                  
                    
                   </Table.Row>

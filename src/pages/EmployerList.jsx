@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table,  Icon,Menu} from "semantic-ui-react";
+import EmployeeService from "../Services/EmployeeService";
 import EmployerService from '../Services/employerService'
 
 export default function EmployerList() {
@@ -11,7 +12,7 @@ export default function EmployerList() {
         employerService.getEmployeer().then(result=>setEmloyer(result.data.data))     
       },[])
     
-      return (
+      return ( 
         <div>
  
           <Table celled>

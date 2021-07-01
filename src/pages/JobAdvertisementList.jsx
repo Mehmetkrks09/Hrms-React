@@ -1,21 +1,72 @@
 import React, { useState, useEffect } from "react";
-import { Table,  Icon,Menu} from "semantic-ui-react";
+import { Table,  Icon,Menu,Button} from "semantic-ui-react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { addToFavorites, removeFromFavorites } from "../Store/Actions/FavoriteActions";
 import JobAdvertisementService from '../Services/jobAdvertisementService'
+import { addToCart } from "../Store/Actions/CartActions";
 
 
 export default function JobAdvertisementList() {
     const [jobAdvertisements, setJobAdvertisement] = useState([])
-
+    const dispatch = useDispatch();
+    const [activePage, setActivePage] = useState(1);
+    const [filterOption, setFilterOption] = useState({});
+    const [pageSize] = useState(2);
+    const [totalPageSize, setTotalPageSize] = useState(0);
 
     useEffect(()=>{
        let jobAdvertisementService=new JobAdvertisementService()
        jobAdvertisementService.getAllJobAdvertisement().then(result=>setJobAdvertisement(result.data.data))     
       },[])
+  //     jobAdService.getPageableAndFilterJobPostings(activePage, pageSize, filterOption)
+  //   .then((result) => {
+  //     setJobAds(result.data.data);
+  //     setTotalPageSize(parseInt(result.data.message));
+  //   });
+  // }, [filterOption, activePage, pageSize]);
+
+  const handleFilterClick = (filterOption) => {
+    if(filterOption.cityId.length === 0){
+      filterOption.cityId = null;
+    }
+    if(filterOption.jobPositionId.length === 0){
+      filterOption.jobPositionId = null;
+    }
+    if(filterOption.workPlaceId.length === 0){
+      filterOption.workPlaceId = null;
+    }
+    if(filterOption.workTimeId.length === 0){
+      filterOption.workTimeId = null;
+    }
+    setFilterOption(filterOption);
+    setActivePage(1);
+  }
+
+  const handlePaginationChange = (e, { activePage }) => {
+    setActivePage(activePage);
+  }
+  
     
+      const handleAddToFavorites=(jobAdvertisements)=>{
+        dispatch(addToFavorites(jobAdvertisements))
+        toast.success(`${jobAdvertisements.employerId} sepete eklendi!`)
+        console.log("eklendi")
+    
+     }
+    //  const handleAddToFavorities = (jobAdvertisements) => {
+    //   dispatch(addToCart(jobAdvertisements));
+    //   toast.success(`${jobAdvertisements.employerId} sepete eklendi!`)
+    // };
+
+      const handleRemoveToFavorites=(jobAdvertisements)=>{
+        dispatch(removeFromFavorites(jobAdvertisements))
+    
+      }
       return (
         <div>
  
-       
+        
           <Table celled>
             <Table.Header>
               <Table.Row>
@@ -26,7 +77,7 @@ export default function JobAdvertisementList() {
                 <Table.HeaderCell>description</Table.HeaderCell>
                 <Table.HeaderCell>numberOfOpenPositions</Table.HeaderCell>
                 <Table.HeaderCell>deadline</Table.HeaderCell>
-                <Table.HeaderCell>createdDate</Table.HeaderCell>
+                <Table.HeaderCell>  </Table.HeaderCell>
                
               
               </Table.Row>
@@ -42,8 +93,13 @@ export default function JobAdvertisementList() {
                     <Table.Cell>{jobAdvertisements.minSalary}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.maxSalary}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.description}</Table.Cell>
+                    <Table.Cell>{jobAdvertisements.numberOfOpenPositions}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.deadline}</Table.Cell>
-                    <Table.Cell>{jobAdvertisements.createdDate}</Table.Cell>
+                    <Table.Cell>
+                    <Button size="mini" basic color="blue" onClick={() => handleAddToFavorites(jobAdvertisements)}>
+                        Add Favorities
+                      </Button>
+                    </Table.Cell>
                
                  
                    
