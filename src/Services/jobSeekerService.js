@@ -8,4 +8,7 @@ export default  class JobSeekerService{
     postJobSeeker(){
         return axios.post("http://localhost:8080/api/jobSeekers/register")
     }
-}
+    getById(values){
+        return axios.get("http://localhost:8080/api/jobSeekers/getById?id="+values)
+    }
+}  

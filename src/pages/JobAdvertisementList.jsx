@@ -1,104 +1,203 @@
 import React, { useState, useEffect } from "react";
-import { Table,  Icon,Menu,Button} from "semantic-ui-react";
+
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { useFormik } from 'formik'
+import {Table,  Icon,Menu,Button, Card,Label, Form ,Dropdown} from 'semantic-ui-react'
 import { addToFavorites, removeFromFavorites } from "../Store/Actions/FavoriteActions";
 import JobAdvertisementService from '../Services/jobAdvertisementService'
 import { addToCart } from "../Store/Actions/CartActions";
+import JobSeekerService from "../Services/jobSeekerService";
+import WaysOfWorkService from "../Services/WaysOfWorkService";
+import WorkingTimeService from "../Services/WorkingTimeService";
+import CityService from "../Services/cityService";
 
 
 export default function JobAdvertisementList() {
     const [jobAdvertisements, setJobAdvertisement] = useState([])
     const dispatch = useDispatch();
-    const [activePage, setActivePage] = useState(1);
-    const [filterOption, setFilterOption] = useState({});
-    const [pageSize] = useState(2);
-    const [totalPageSize, setTotalPageSize] = useState(0);
+    const [jobSeekers, setJobSeeker] = useState([])
+    const [cities, setCities] = useState([]);
+    const [wayOfWorking, setWayOfWorking] = useState([]);
 
     useEffect(()=>{
        let jobAdvertisementService=new JobAdvertisementService()
-       jobAdvertisementService.getAllJobAdvertisement().then(result=>setJobAdvertisement(result.data.data))     
+       let jobSeekerService =new JobSeekerService();
+       let wayOfWorkingService=new WaysOfWorkService();
+       let cityService =new CityService();
+
+jobSeekerService.getById(2).then(result => setJobSeeker(result.data.data));
+       jobAdvertisementService.getAllJobAdvertisement().then(result=>setJobAdvertisement(result.data.data));    
+       wayOfWorkingService.getAll().then(result=>setWayOfWorking(result.data.data));  
+  cityService.getAll().then(result=>setCities(result.data.data));  
       },[])
-  //     jobAdService.getPageableAndFilterJobPostings(activePage, pageSize, filterOption)
-  //   .then((result) => {
-  //     setJobAds(result.data.data);
-  //     setTotalPageSize(parseInt(result.data.message));
-  //   });
-  // }, [filterOption, activePage, pageSize]);
-
-  const handleFilterClick = (filterOption) => {
-    if(filterOption.cityId.length === 0){
-      filterOption.cityId = null;
-    }
-    if(filterOption.jobPositionId.length === 0){
-      filterOption.jobPositionId = null;
-    }
-    if(filterOption.workPlaceId.length === 0){
-      filterOption.workPlaceId = null;
-    }
-    if(filterOption.workTimeId.length === 0){
-      filterOption.workTimeId = null;
-    }
-    setFilterOption(filterOption);
-    setActivePage(1);
-  }
-
-  const handlePaginationChange = (e, { activePage }) => {
-    setActivePage(activePage);
-  }
   
+//jobSeeker method ekelemeyi unutma
+  // const handleFilterClick = (filterOption) => {
+  //   if(filterOption.cityId.length === 0){
+  //     filterOption.cityId = null;
+  //   }
+  //   if(filterOption.jobPositionId.length === 0){
+  //     filterOption.jobPositionId = null;
+  //   }
+  //   if(filterOption.workPlaceId.length === 0){
+  //     filterOption.workPlaceId = null;
+  //   }
+  //   if(filterOption.workTimeId.length === 0){
+  //     filterOption.workTimeId = null;
+  //   }
+  //   setFilterOption(filterOption);
+  //   setActivePage(1);
+  // }
+
+  // const handlePaginationChange = (e, { activePage }) => {
+  //   setActivePage(activePage);
+  // }
+  const cityOption = cities.map((city, index) => ({
+    key: index,
+    text: city.cityName,
+    value: city.id,
+}));
+const wayOfWorkingOption = wayOfWorking.map((workType, index) => ({
+    key: index,
+    text: workType.working,
+    value: workType.id,
+}));
+const formik = useFormik({
+  initialValues: {
+      cityId: "",
+      wayOfWorkingId: "",
+  },
+  onSubmit: values => {
+    let jobAdvertisementService = new JobAdvertisementService;
+   if(values.cityId == "" && values.wayOfWorkingId != ""){
+    jobAdvertisementService.getByWayOfWorking(values.wayOfWorkingId).then(result => setJobAdvertisement(result.data.data));
+    //değiştir method ekle
+   }
+   else if(values.wayOfWorkingId == ""&& values.cityId != ""){
+    jobAdvertisementService.getByCityId(values.cityId).then(result => setJobAdvertisement(result.data.data));
+     //değiştir method ekle
+   }
+   else{
     
-      const handleAddToFavorites=(jobAdvertisements)=>{
-        dispatch(addToFavorites(jobAdvertisements))
-        toast.success(`${jobAdvertisements.employerId} sepete eklendi!`)
-        console.log("eklendi")
+    jobAdvertisementService.getByWayOfWorkingIdAndCityId(values.cityId,values.wayOfWorkingId).then(result => setJobAdvertisement(result.data.data));
+    console.log(values.cityId,values.wayOfWorkingId);
+   }
+    //değiştir method ekle
+}
+})
+function getAllJobAdvertisement(){
+  let jobAdvertisementService = new JobAdvertisementService;
+  jobAdvertisementService.getAllJobAdvertisement().then(result => setJobAdvertisement(result.data.data));
+}
+
+const handleChangeSemantic = (value, fieldName) => {
+  formik.setFieldValue(fieldName, value);
+}
+      // const handleAddToFavorites=(jobAdvertisements)=>{
+      //   dispatch(addToFavorites(jobAdvertisements))
+      //   toast.success(`${jobAdvertisements.employerId} sepete eklendi!`)
+      //   console.log("eklendi")
     
-     }
+    // }
     //  const handleAddToFavorities = (jobAdvertisements) => {
     //   dispatch(addToCart(jobAdvertisements));
     //   toast.success(`${jobAdvertisements.employerId} sepete eklendi!`)
     // };
 
-      const handleRemoveToFavorites=(jobAdvertisements)=>{
-        dispatch(removeFromFavorites(jobAdvertisements))
+      // const handleRemoveToFavorites=(jobAdvertisements)=>{
+      //   dispatch(removeFromFavorites(jobAdvertisements))
     
-      }
+      // }
       return (
         <div>
- 
-        
+ <div>
+ <Form onSubmit={formik.handleSubmit}>
+ <Card>
+            <label>Şehir</label>
+            <Dropdown
+              clearable
+              item
+              placeholder="Şehir"
+              search
+              selection
+              onChange={(event, data) =>
+                handleChangeSemantic(data.value, "cityId")
+              }
+              onBlur={formik.onBlur}
+              id="cityId"
+              value={formik.values.cityId}
+              options={cityOption}
+            />
+            
+          </Card>
+
+
+          <Card>
+          <label>Çalışma yeri</label>
+          <Dropdown
+                  clearable
+                  item
+                  placeholder="Çalışma yeri"
+                  search
+                  selection
+                  onChange={(event, data) =>
+                    handleChangeSemantic(data.value, "wayOfWorkingId")
+                  }
+                  onBlur={formik.onBlur}
+                  id="wayOfWorkingId"
+                  value={formik.values.wayOfWorkingId}
+                  options={wayOfWorkingOption}
+                />
+               
+          </Card>
+                            <Button color="vk" type='submit' fluid style={{ marginTop: "20px" ,marginBottom:"15px"}} >Filtrele</Button>
+                            
+                        </Form>
+                        <Button content='Filtreleri sıfırla' icon='right arrow' labelPosition='left' onClick={e=>getAllJobAdvertisement()}  floated="left"/>
+ </div>
+
+    
           <Table celled>
             <Table.Header>
               <Table.Row>
-              
+              <Table.HeaderCell>Job Name</Table.HeaderCell>
+              <Table.HeaderCell>description</Table.HeaderCell>
+              <Table.HeaderCell>Way Of Working</Table.HeaderCell>
                 <Table.HeaderCell>Min Salary</Table.HeaderCell>
                 <Table.HeaderCell>Max Salary</Table.HeaderCell>
                 
-                <Table.HeaderCell>description</Table.HeaderCell>
-                <Table.HeaderCell>numberOfOpenPositions</Table.HeaderCell>
-                <Table.HeaderCell>deadline</Table.HeaderCell>
+                
+                
+                <Table.HeaderCell>City</Table.HeaderCell>
+                <Table.HeaderCell>number Of Open Positions</Table.HeaderCell>
+                <Table.HeaderCell>Created Date</Table.HeaderCell>
+                <Table.HeaderCell>Dead Line</Table.HeaderCell>
                 <Table.HeaderCell>  </Table.HeaderCell>
                
               
               </Table.Row>
             </Table.Header>
-    
+           
             <Table.Body>
           
           
                   {jobAdvertisements.map((jobAdvertisements)=>
                   (
                     <Table.Row key={jobAdvertisements.id}>
-                    
+                     <Table.Cell>{jobAdvertisements.job.jobName}</Table.Cell>
+                     <Table.Cell>{jobAdvertisements.description}</Table.Cell>
+                     <Table.Cell>{jobAdvertisements.wayOfWorking.working}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.minSalary}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.maxSalary}</Table.Cell>
-                    <Table.Cell>{jobAdvertisements.description}</Table.Cell>
+                    <Table.Cell>{jobAdvertisements.city.cityName}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.numberOfOpenPositions}</Table.Cell>
+                    <Table.Cell>{jobAdvertisements.createdDate}</Table.Cell>
                     <Table.Cell>{jobAdvertisements.deadline}</Table.Cell>
                     <Table.Cell>
-                    <Button size="mini" basic color="blue" onClick={() => handleAddToFavorites(jobAdvertisements)}>
+                    {/* <Button size="mini" basic color="blue" onClick={() => handleAddToFavorites(jobAdvertisements)}>
                         Add Favorities
-                      </Button>
+                      </Button> */}
                     </Table.Cell>
                
                  

@@ -26,5 +26,14 @@ export default class JobAdvertisementService {
       "http://localhost:8080/api/jobadvertisement/getByIsActiveTrue"
     );
   }
+  getByWayOfWorkingIdAndCityId(cityId,wayOfWorkingId){
+    return axios.get("http://localhost:8080/api/jobadvertisement/getAllByActivatedAndWayOfWorkingandCityId?cityId="+cityId+"&wayOfWorkingId="+wayOfWorkingId);
+  }
   
+  getByCityId(cityId){
+    return axios.get("http://localhost:8080/api/jobadvertisement/getByCityId?id="+cityId);
+  }
+  getByWayOfWorking(wayOfWorkingId){
+    return axios.get("http://localhost:8080/api/jobadvertisement/getAllByActivatedAndWayOfWorking?wayOfWorkingId="+wayOfWorkingId);
+  }
 }
