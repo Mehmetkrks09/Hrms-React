@@ -11,10 +11,10 @@ import {
   export default function FavoriteAdvertisementReducer(state = initialState, { type, payload }) {
     switch (type) {
       case ADD_TO_FAVORİTES:
-        let advertisement = state.favoriteAdvertisement.find((c) => c.advertisement.id === payload.id);
+        let advertisement = state.favoriteAdvertisement.find((c) => c.favoriteAdvertisement.id === payload.id);
         if (advertisement) {
-         toast.warning("Advertisement Already Exist.");
-       
+         toast.error("Advertisement Already Exist.");
+            
   
  
           return {
@@ -32,7 +32,7 @@ import {
         let advertisement1 = state.favoriteAdvertisement.find((c) => c.advertisement.id === payload.id);
        
         if (advertisement1) {
-          
+          console.log("Silindi")
           
           return { ...state };
         } else {

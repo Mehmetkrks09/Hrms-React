@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Table,  Icon,Menu} from "semantic-ui-react";
-import EmployeeService from "../Services/EmployeeService";
+import { Table, Icon,Menu,Label} from "semantic-ui-react";
+
 import EmployerService from '../Services/employerService'
 
 export default function EmployerList() {
     const [employers, setEmloyer] = useState([])
+    
 
 
     useEffect(()=>{
         let employerService = new EmployerService()
-        employerService.getEmployeer().then(result=>setEmloyer(result.data.data))     
+        employerService.getEmployeer().then(result=>setEmloyer(result.data.data))    
       },[])
     
+
+   
+     
+        
+      
       return ( 
         <div>
  
@@ -25,6 +31,7 @@ export default function EmployerList() {
                 <Table.HeaderCell>companyName</Table.HeaderCell>
                 <Table.HeaderCell>phoneNumber</Table.HeaderCell>
                 <Table.HeaderCell>webAddress</Table.HeaderCell>
+                <Table.HeaderCell> Verify</Table.HeaderCell>
                
               
               </Table.Row>
@@ -43,6 +50,23 @@ export default function EmployerList() {
                     <Table.Cell>{employers.companyName}</Table.Cell>
                     <Table.Cell>{employers.phoneNumber}</Table.Cell>
                     <Table.Cell>{employers.webAddress}</Table.Cell>
+                     <Table.Cell> 
+                     {employers.systemPersonnelVerify
+                        ? 
+                        <Label color="green" >
+                       <Icon name="check" size="large" />
+
+                       
+                      </Label>
+                     
+
+                       :   
+                          <Label basic color="red" style={{marginLeft:"0.5em",fontSize:"0.80em"}} >
+                       <Icon name="hourglass two" />
+                       onay bekleniyor.
+                      </Label>}
+                       </Table.Cell> 
+                 
                  
                    
                   </Table.Row>

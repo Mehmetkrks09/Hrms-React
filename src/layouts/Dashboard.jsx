@@ -15,6 +15,10 @@ import JobAd from "../pages/JobAd";
 import CvUpdate from "../pages/CvUpdate";
 import CvAdd from "../pages/CvAdd";
 import EmployeeInfoUpdate from "../pages/EmployeeInfoUpdate";
+import Favorites from "./Favorities";
+import EmployerUpdate from "../pages/EmployerUpdate";
+import EmployeeList from "../pages/EmployeeList";
+import EmployerList from "../pages/EmployerList";
 
 export default function Dashboard() {
   return (
@@ -28,10 +32,11 @@ export default function Dashboard() {
             <Route
               exact
               path={"/jobAdvertisementList"}
-              component={JobAdvertisementList}
-            />
+              component={JobAdvertisementList}    />
+               <Route exact path="/employerList" component={EmployerList} />
+             < Route exact path={"/employeeUpdate"} component={EmployeeInfoUpdate} />
              <Route exact path={"/advertisement"} component={JobAdvertisementList} />
-             {/* <Route exact path="/favorities" component={Favor} /> */}
+             <Route exact path={"/employerUpdate"} component={EmployerUpdate} />
             <Route exact path={"/emp"} component={EmployeeInfoUpdate} />
             <Route exact path={"/cvAdd"} component={CvAdd} />
             <Route exact path={"/cvUpdate"} component={CvUpdate} />

@@ -1,98 +1,88 @@
-import React, { useEffect, useState } from "react";
+
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, Dropdown, Input, TextArea, Card, Form, Grid } from "semantic-ui-react";
-import EmployeeService from "../Services/employeeService";
+import { Button, Dropdown, Input, TextArea, Card, Form, Text } from "semantic-ui-react";
+import EmployerService from "../Services/employerService";
 
 
 
+export default function EmployerUpdate() {
 
+   let employerService= new EmployerService();
 
-
-
-
-export default function EmployeeInfoUpdate() {
-
-  let employeeService=new EmployeeService();
-
-   const EmployeeUpdateSchema = Yup.object().shape({
-    
-   
-  
+  const EmployerUpdateSchema = Yup.object().shape({
+    companyName: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    webSite: Yup.string().required("Bu alanın doldurulması zorunludur"),
+    phoneNumber: Yup.string().length(11).required("Bu alanın doldurulması zorunludur"),
     email: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    password: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    firstName: Yup.string().required("Bu alanın doldurulması zorunludur"),
-    lastName: Yup.string().required("Bu alanın doldurulması zorunludur"),
    
   });
 
 
   const formik = useFormik({
     initialValues: {
+        companyName: "",
+        webSite: "",
+        phoneNumber: "",
         email: "",
-        password: "",
-        firstName: "",
-        lastName: "",
-        id:"",
-  
-     
+        employerId:"",
+      
     },
-     validationSchema: EmployeeUpdateSchema,
+    validationSchema: EmployerUpdateSchema,
     onSubmit: (values) => {
  
-    values.id="26";
+    values.employerId="1";
     
-       employeeService.putEmployee(values).then((result) => console.log(result.data.data));
-      alert("Employee Has Been Updated");
+       employerService.EmployerUpdate(values).then((result) => console.log(result.data.data));
+       
+      alert("Employer Has Been Updated");
       console.log(values)
-      
-      
+
     } 
   });
 
-
-  
+ 
 
   return (
     <div>
       <Card fluid>
-      <Card.Content header='Employee Güncelle' />
+      <Card.Content header='Employer Güncelle' />
       <Card.Content>
       <Form onSubmit={formik.handleSubmit}>
         
-              <Form.Field>
-              <label>First Name </label>
-                <Input
-                  placeholder="First Name..."
-               
-                error={Boolean(formik.errors.firstName).toString()}
-                  value={formik.values.firstName}
-                  name="firstName"
+              
+                   <Form.Field>
+              <label>Company Name </label>
+                <input type="text" 
+                  placeholder="companyName..."
+                error={Boolean(formik.errors.companyName).toString()}
+                  value={formik.values.companyName}
+                  name="companyName"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.firstName && formik.touched.firstName && (
+                {formik.errors.companyName && formik.touched.companyName && (
                   <div className={"ui pointing red basic label"}>
-                    {formik.errors.firstName}
+                    {formik.errors.companyName}
                   </div>
                 )}
               </Form.Field>
 
               
               <Form.Field>
-              <label>Last Name </label>
-                <Input
-                  placeholder="Last Name..."
+              <label>Web Site  </label>
+                <input type="text" 
+                  placeholder="Web Site"
                  
-                error={Boolean(formik.errors.lastName).toString()}
-                  value={formik.values.lastName}
-                  name="lastName"
+                error={Boolean(formik.errors.webSite).toString()}
+                  value={formik.values.webSite}
+                  name="webSite"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.lastName && formik.touched.lastName && (
+                {formik.errors.webSite && formik.touched.webSite && (
                   <div className={"ui pointing red basic label"}>
-                    {formik.errors.lastName}
+                    {formik.errors.webSite}
                   </div>
                 )}
               </Form.Field>
@@ -114,19 +104,19 @@ export default function EmployeeInfoUpdate() {
                 )}
               </Form.Field>
               <Form.Field>
-              <label>Şifre </label>
-                <Input type="password"
-                  placeholder="Password"
+              <label>Phone Number </label>
+                <input type="text"
+                  placeholder="Phone Number"
                 
-                error={Boolean(formik.errors.password).toString()}
-                  value={formik.values.password}
-                  name="password"
+                error={Boolean(formik.errors.phoneNumber).toString()}
+                  value={formik.values.phoneNumber}
+                  name="phoneNumber"
                   onChange={formik.handleChange}
                   onBlur={formik.handleBlur}
                 />
-                {formik.errors.password && formik.touched.password && (
+                {formik.errors.phoneNumber && formik.touched.phoneNumber && (
                   <div className={"ui pointing red basic label"}>
-                    {formik.errors.password}
+                    {formik.errors.phoneNumber}
                   </div>
                 )}
               </Form.Field>

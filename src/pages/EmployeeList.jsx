@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Table,  Icon,Menu} from "semantic-ui-react";
-import EmployeeService from "../Services/EmployeeService";
+import EmployeeService from "../Services/employeeService";
 
 
 
@@ -25,7 +25,7 @@ export default function EmployeeList() {
                 <Table.HeaderCell>PasswORD</Table.HeaderCell>
                 
                 <Table.HeaderCell>first Name</Table.HeaderCell>
-                <Table.HeaderCell>last <Name></Name></Table.HeaderCell>
+                <Table.HeaderCell>last </Table.HeaderCell>
                
               
               </Table.Row>

@@ -4,6 +4,7 @@ import { Container, Menu, Icon } from "semantic-ui-react";
 
 import SignedOut from "./SignedOut";
 import SignedIn from "./SignedIn";
+import Favorites from "./Favorities";
 import { useHistory } from "react-router";
 
 export default function Navi() {
@@ -27,6 +28,9 @@ export default function Navi() {
             <Icon name="home" />
             Ana Sayfa
           </Menu.Item>
+          {/* <Menu.Item>
+            <Favorites/>
+          </Menu.Item> */}
           <Menu.Item name="home" />
           <Menu.Item name="messages" />
           <Menu.Menu position="right">
