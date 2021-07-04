@@ -19,6 +19,7 @@ import Favorites from "./Favorities";
 import EmployerUpdate from "../pages/EmployerUpdate";
 import EmployeeList from "../pages/EmployeeList";
 import EmployerList from "../pages/EmployerList";
+import FavoriteAdList from "../pages/FavoriteAdList";
 
 export default function Dashboard() {
   return (
@@ -33,6 +34,7 @@ export default function Dashboard() {
               exact
               path={"/jobAdvertisementList"}
               component={JobAdvertisementList}    />
+                 <Route exact path="/favoriteList" component={FavoriteAdList} />
                <Route exact path="/employerList" component={EmployerList} />
              < Route exact path={"/employeeUpdate"} component={EmployeeInfoUpdate} />
              <Route exact path={"/advertisement"} component={JobAdvertisementList} />
