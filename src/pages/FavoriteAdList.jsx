@@ -11,7 +11,7 @@ export default function FavoriteAdList() {
     favoriteService
       .getByJobSeekerId(7)
       .then((result) => setFavorites(result.data.data));
-  }, []);
+  }, []); 
 
   const deleteToFav = () => {
     let favoriteService = new FavoriteAdvertisementService();
