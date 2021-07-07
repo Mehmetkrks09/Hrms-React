@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import {
@@ -9,26 +8,23 @@ import {
   Menu,
   Button,
   Card,
-  Label,
   Form,
   Dropdown,
 } from "semantic-ui-react";
-import {
-  addToFavorites,
-  removeFromFavorites,
-} from "../Store/Actions/FavoriteActions";
+
 import JobAdvertisementService from "../Services/jobAdvertisementService";
-import { addToCart } from "../Store/Actions/CartActions";
+
 import JobSeekerService from "../Services/jobSeekerService";
 import WaysOfWorkService from "../Services/WaysOfWorkService";
-import WorkingTimeService from "../Services/WorkingTimeService";
+
 import CityService from "../Services/cityService";
 import FavoriteAdvertisementService from "../Services/favoriteAdvertisement";
 
 export default function JobAdvertisementList() {
   const [jobAdvertisements, setJobAdvertisement] = useState([]);
-  const dispatch = useDispatch();
+
   const [jobSeekers, setJobSeeker] = useState([]);
+  //jobSeekers kullanılmama sebebi şuanlık oturum sistemine geçmediğim için. ileride onu da kullanıcaz.
   const [cities, setCities] = useState([]);
   const [wayOfWorking, setWayOfWorking] = useState([]);
 
@@ -67,11 +63,11 @@ export default function JobAdvertisementList() {
     },
     onSubmit: (values) => {
       let jobAdvertisementService = new JobAdvertisementService();
-      if (values.cityId == "" && values.wayOfWorkingId != "") {
+      if (values.cityId === "" && values.wayOfWorkingId !== "") {
         jobAdvertisementService
           .getByWayOfWorking(values.wayOfWorkingId)
           .then((result) => setJobAdvertisement(result.data.data));
-      } else if (values.wayOfWorkingId == "" && values.cityId != "") {
+      } else if (values.wayOfWorkingId === "" && values.cityId !== "") {
         jobAdvertisementService
           .getByCityId(values.cityId)
           .then((result) => setJobAdvertisement(result.data.data));
@@ -94,15 +90,12 @@ export default function JobAdvertisementList() {
     formik.setFieldValue(fieldName, value);
   };
 
- 
-  
-  const addtoFavorites = () => {
+  const addtoFavorites = (id) => {
     let favoriteService = new FavoriteAdvertisementService();
 
     const favorite = {
       jobSeekerId: 7,
-      jobAdvertisementId: 40,
-      
+      jobAdvertisementId: id,
     };
     favoriteService.postFavoriteAdvertisement(favorite).then();
     console.log(favorite);
@@ -195,17 +188,15 @@ export default function JobAdvertisementList() {
               <Table.Cell>{jobAdvertisements.createdDate}</Table.Cell>
               <Table.Cell>{jobAdvertisements.deadline}</Table.Cell>
               <Table.Cell>
-              <Button
-                onClick={()=>addtoFavorites()}
-                    circular
-                    style={{ marginLeft: "0.5em" }}
-                    size="large"
-                    color="red"
-                    icon="heart"
-                    inverted
-                  >
-                 
-                  </Button>
+                <Button
+                  onClick={() => addtoFavorites(jobAdvertisements.id)}
+                  circular
+                  style={{ marginLeft: "0.5em" }}
+                  size="large"
+                  color="red"
+                  icon="heart"
+                  inverted
+                ></Button>
               </Table.Cell>
             </Table.Row>
           ))}

@@ -1,7 +1,7 @@
 
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, Dropdown, Input, TextArea, Card, Form, Text } from "semantic-ui-react";
+import { Button, Input, Card, Form } from "semantic-ui-react";
 import EmployerService from "../Services/employerService";
 
 

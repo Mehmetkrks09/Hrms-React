@@ -15,11 +15,12 @@ import JobAd from "../pages/JobAd";
 import CvUpdate from "../pages/CvUpdate";
 import CvAdd from "../pages/CvAdd";
 import EmployeeInfoUpdate from "../pages/EmployeeInfoUpdate";
-import Favorites from "./Favorities";
+
 import EmployerUpdate from "../pages/EmployerUpdate";
-import EmployeeList from "../pages/EmployeeList";
+
 import EmployerList from "../pages/EmployerList";
 import FavoriteAdList from "../pages/FavoriteAdList";
+import EmployeeList from "../pages/EmployeeList";
 
 export default function Dashboard() {
   return (
@@ -30,10 +31,8 @@ export default function Dashboard() {
             <Categories />
           </Grid.Column>
           <Grid.Column width={12}>
-            <Route
-              exact
-              path={"/jobAdvertisementList"}
-              component={JobAdvertisementList}    />
+          <Route exact path="/employeeList" component={EmployeeList} />
+          
                  <Route exact path="/favoriteList" component={FavoriteAdList} />
                <Route exact path="/employerList" component={EmployerList} />
              < Route exact path={"/employeeUpdate"} component={EmployeeInfoUpdate} />

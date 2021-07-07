@@ -8,11 +8,12 @@ export default function EmployeeList() {
     const [employees, setEmployee] = useState([])
 
 
-    let employeeService=new EmployeeService();
+    
 
     useEffect(()=>{
+      let employeeService=new EmployeeService();
        
-        employeeService.getAllEmployeee().then(result=>setEmployee(result.data.data))     
+        employeeService.getAllEmployee().then(result=>setEmployee(result.data.data))     
     },[])
     
       return (
@@ -21,11 +22,12 @@ export default function EmployeeList() {
           <Table celled>
             <Table.Header>
               <Table.Row>
+              <Table.HeaderCell>First Name</Table.HeaderCell>
+                <Table.HeaderCell>last Name </Table.HeaderCell>
                 <Table.HeaderCell>Email</Table.HeaderCell>
-                <Table.HeaderCell>PasswORD</Table.HeaderCell>
+                <Table.HeaderCell>Password</Table.HeaderCell>
                 
-                <Table.HeaderCell>first Name</Table.HeaderCell>
-                <Table.HeaderCell>last </Table.HeaderCell>
+              
                
               
               </Table.Row>

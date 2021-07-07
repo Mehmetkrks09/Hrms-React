@@ -13,7 +13,9 @@ export default function SignedIn(props) {
             </Button>
 
           <Image avatar spaced="right" src="https://lh3.googleusercontent.com/ogw/ADea4I4TgIjgTAHhSUiSzfiCrKPSx4xthwaStj2FxeRXYzg=s83-c-mo "/>
-         <Dropdown pointing="top left " text="Mehmet">
+         <Dropdown
+          pointing="top left" 
+          text="Mehmet">
              
              <Dropdown.Menu>
                  <Dropdown.Item text="Bilgilerim" icon="info"/>

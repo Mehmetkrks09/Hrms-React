@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { Button, Dropdown, Input, TextArea, Card, Form, Grid } from "semantic-ui-react";
+import { Button, Dropdown, TextArea, Card, Form } from "semantic-ui-react";
 import CvService from "../Services/cvService";
 import DepartmentService from "../Services/departmentService";
 import ForeignLanguageService from "../Services/foreignLanguageService";

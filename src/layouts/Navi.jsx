@@ -4,7 +4,7 @@ import { Container, Menu, Icon } from "semantic-ui-react";
 
 import SignedOut from "./SignedOut";
 import SignedIn from "./SignedIn";
-import Favorites from "./Favorities";
+
 import { useHistory } from "react-router";
 
 export default function Navi() {

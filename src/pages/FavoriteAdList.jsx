@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
-import { Table, Icon, Menu,Button } from "semantic-ui-react";
+import { Link} from "react-router-dom";
+
+import { Table, Icon, Menu,Button} from "semantic-ui-react";
 import FavoriteAdvertisementService from "../Services/favoriteAdvertisement";
 
 export default function FavoriteAdList() {
   const [favorites, setFavorites] = useState([]);
 
-  let favoriteService = new FavoriteAdvertisementService();
+ 
 
   useEffect(() => {
+    let favoriteService = new FavoriteAdvertisementService();
     favoriteService
       .getByJobSeekerId(7)
       .then((result) => setFavorites(result.data.data));
   }, []); 
 
-  const deleteToFav = () => {
+  const deleteToFav = (id) => {
     let favoriteService = new FavoriteAdvertisementService();
-    const values = {
-      id: 32,
-    };
-    console.log(values)
-    favoriteService.deleteFav(values.id);
+   
+    console.log(id)
+    favoriteService.deleteFav(id);
     
   };
 
@@ -28,7 +29,7 @@ export default function FavoriteAdList() {
       <Table celled>
         <Table.Header>
           <Table.Row>
-            <Table.HeaderCell>Job Advertisement</Table.HeaderCell>
+            <Table.HeaderCell > Job Advertisement</Table.HeaderCell>
             <Table.HeaderCell>Company Name </Table.HeaderCell>
             <Table.HeaderCell>Dead line</Table.HeaderCell>
             <Table.HeaderCell> </Table.HeaderCell>
@@ -38,15 +39,17 @@ export default function FavoriteAdList() {
         <Table.Body>
           {favorites.map((favorites) => (
             <Table.Row key={favorites.id}>
-              <Table.Cell>{favorites.jobAdvertisement.description}</Table.Cell>
+              <Table.Cell> <Link to={`/favorities/${favorites.id}`}>{favorites.jobAdvertisement.description}</Link> </Table.Cell>
+              
               <Table.Cell>
                 {favorites.jobAdvertisement.employer.companyName}
               </Table.Cell>
               <Table.Cell>{favorites.jobAdvertisement.deadline}</Table.Cell>
-              <Table.Cell>
+              <Table.Cell> 
                 {
                   <Button
-                    onClick={() => deleteToFav()}
+               
+                    onClick={() => deleteToFav(favorites.id)}
                     circular
                     style={{ marginLeft: "0.5em" }}
                     size="large"
