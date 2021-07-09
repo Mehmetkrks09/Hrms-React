@@ -3,8 +3,7 @@ import { toast } from "react-toastify";
 import { Card, Button } from "semantic-ui-react";
 import CvService from "../Services/cvService";
 
-
-export default class PhotoUpdate extends Component  {
+export default class PhotoUpdate extends Component {
   state = {
     selectedFile: null,
   };
@@ -22,16 +21,14 @@ export default class PhotoUpdate extends Component  {
       this.state.selectedFile,
       this.state.selectedFile.name
     );
-    let cvService= new CvService();
-    cvService.postCvPhoto
-      (12, fd)
-      .then((res) => {
+    let cvService = new CvService();
+    try {
+      cvService.postCvPhoto(12, fd).then((res) => {
         toast.success(res.data.message);
-        this.props.updateCvValues();
-      })
-      .catch((result) => {
-        toast.error("Yeniden deneyiniz");
       });
+    } catch (error) {
+      toast.error("Yeniden deneyiniz");
+    }
   };
 
   render() {
@@ -46,8 +43,19 @@ export default class PhotoUpdate extends Component  {
               onChange={this.fileSelectedHandler}
               ref={(fileInput) => (this.fileInput = fileInput)}
             />
-            <button className="ui button" onClick={() => this.fileInput.click()}>Dosya Seç</button>
-            <Button color={"green"} onClick={this.fileUploadHandler} disabled={this.state.selectedFile==null}>Yükle</Button>
+            <button
+              className="ui button"
+              onClick={() => this.fileInput.click()}
+            >
+              Dosya Seç
+            </button>
+            <Button
+              color={"green"}
+              onClick={this.fileUploadHandler}
+              disabled={this.state.selectedFile == null}
+            >
+              Yükle
+            </Button>
           </Card.Content>
         </Card>
       </div>

@@ -32,7 +32,11 @@ export default function JobSeeker() {
         <Table.Body>
           {jobSeekers.map((jobSeekers) => (
             <Table.Row key={jobSeekers.id}>
-              <Table.Cell><Link to ={`/jobSeeker/${jobSeekers.id}`}>{jobSeekers.firstName}</Link></Table.Cell>
+              <Table.Cell>
+                <Link to={`/jobSeeker/${jobSeekers.id}`}>
+                  {jobSeekers.firstName}
+                </Link>
+              </Table.Cell>
               <Table.Cell>{jobSeekers.lastName}</Table.Cell>
               <Table.Cell>{jobSeekers.email}</Table.Cell>
               <Table.Cell>{jobSeekers.password}</Table.Cell>

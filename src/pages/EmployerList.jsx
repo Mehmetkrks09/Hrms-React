@@ -3,14 +3,11 @@ import { Table, Icon, Menu, Label } from "semantic-ui-react";
 
 import EmployerService from "../Services/employerService";
 
-
 export default function EmployerList() {
   const [employers, setEmloyer] = useState([]);
 
   useEffect(() => {
     let employerService = new EmployerService();
-
-
 
     employerService
       .getEmployeer()
@@ -30,7 +27,7 @@ export default function EmployerList() {
             <Table.HeaderCell>phoneNumber</Table.HeaderCell>
             <Table.HeaderCell>webAddress</Table.HeaderCell>
             <Table.HeaderCell> Verify</Table.HeaderCell>
-            <Table.HeaderCell>  </Table.HeaderCell>
+            <Table.HeaderCell> </Table.HeaderCell>
           </Table.Row>
         </Table.Header>
 

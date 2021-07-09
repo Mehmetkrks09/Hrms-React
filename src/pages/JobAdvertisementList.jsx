@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 
-
 import { useFormik } from "formik";
 import {
   Table,
@@ -12,8 +11,7 @@ import {
   Dropdown,
 } from "semantic-ui-react";
 
-import { toast } from 'react-toastify';
-
+import { toast } from "react-toastify";
 
 import JobAdvertisementService from "../Services/jobAdvertisementService";
 
@@ -102,11 +100,10 @@ export default function JobAdvertisementList() {
     };
     favoriteService.postFavoriteAdvertisement(favorite).then();
     console.log(favorite);
-    toast.success("Eklendi")
+    toast.success("Eklendi");
   };
   return (
     <div>
-    
       <div>
         <Form onSubmit={formik.handleSubmit}>
           <Card>
