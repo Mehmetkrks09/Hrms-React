@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link} from "react-router-dom";
-
+import { toast } from 'react-toastify';
 import { Table, Icon, Menu,Button} from "semantic-ui-react";
 import FavoriteAdvertisementService from "../Services/favoriteAdvertisement";
 
@@ -21,6 +21,7 @@ export default function FavoriteAdList() {
    
     console.log(id)
     favoriteService.deleteFav(id);
+    toast.warning("Listeden Çıkarıldı")
     
   };
 

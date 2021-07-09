@@ -8,11 +8,9 @@ export default function Categories() {
             <Menu  pointing vertical  size="large">
         <Menu.Item 
         
+        name='Home Page'
+
         icon ="home"
-        
-          name='Home Page'
-          
-         
         />
         <Menu.Item icon="address card outline"
           name="Cv's"

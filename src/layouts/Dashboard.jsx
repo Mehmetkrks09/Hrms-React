@@ -21,6 +21,7 @@ import EmployerUpdate from "../pages/EmployerUpdate";
 import EmployerList from "../pages/EmployerList";
 import FavoriteAdList from "../pages/FavoriteAdList";
 import EmployeeList from "../pages/EmployeeList";
+import PhotoUpdate from "../pages/PhotoUpdate";
 
 export default function Dashboard() {
   return (
@@ -32,7 +33,7 @@ export default function Dashboard() {
           </Grid.Column>
           <Grid.Column width={12}>
           <Route exact path="/employeeList" component={EmployeeList} />
-          
+          <Route exact path="/photoUpdate" component={PhotoUpdate} />
                  <Route exact path="/favoriteList" component={FavoriteAdList} />
                <Route exact path="/employerList" component={EmployerList} />
              < Route exact path={"/employeeUpdate"} component={EmployeeInfoUpdate} />

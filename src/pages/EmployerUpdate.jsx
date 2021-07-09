@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Input, Card, Form } from "semantic-ui-react";
 import EmployerService from "../Services/employerService";
-
+import { toast } from 'react-toastify';
 
 
 export default function EmployerUpdate() {
@@ -35,7 +35,7 @@ export default function EmployerUpdate() {
     
        employerService.EmployerUpdate(values).then((result) => console.log(result.data.data));
        
-      alert("Employer Has Been Updated");
+      toast.success("Employer Has Been Updated");
       console.log(values)
 
     } 

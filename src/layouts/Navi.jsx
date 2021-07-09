@@ -24,9 +24,11 @@ export default function Navi() {
       <Menu inverted fixed="top">
         <Container>
           {" "}
-          <Menu.Item name="Ana Sayfa">
+          <Menu.Item  name="Ana Sayfa">
+            
             <Icon name="home" />
-            Ana Sayfa
+           Ana Sayfa 
+            
           </Menu.Item>
           {/* <Menu.Item>
             <Favorites/>

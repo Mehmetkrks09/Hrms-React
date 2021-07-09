@@ -3,6 +3,8 @@ import { Container } from 'semantic-ui-react';
 import './App.css';
 import Dashboard from './layouts/Dashboard';
 import Navi from './layouts/Navi';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   return (
@@ -12,7 +14,7 @@ function App() {
       <Container className="main">
 
          <Dashboard/>
-
+         <ToastContainer position="bottom-right"/>
       </Container>
     
     

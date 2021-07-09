@@ -3,7 +3,8 @@ import {
     REMOVE_FROM_FAVORİTES,
   } from "../Actions/FavoriteActions";
   import { favoriteAdvertisement } from "../initialValues/favoriteAdvertisement";
- import { toast } from "react-toastify";
+  import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
   
   const initialState = {
     favoriteAdvertisement,
@@ -16,7 +17,7 @@ import {
          toast.error("Advertisement Already Exist.");
             
   
- 
+   
           return {
             ...state,
           };

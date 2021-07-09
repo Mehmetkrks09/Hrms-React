@@ -9,6 +9,7 @@ import WaysOfWorkService from "../Services/WaysOfWorkService";
 import JobService from "../Services/jobService";
 import WorkingTimeService from "../Services/WorkingTimeService";
 import CityService from "../Services/cityService";
+import { toast } from 'react-toastify';
 
 
 
@@ -48,9 +49,9 @@ export default function JobAd() {
     onSubmit: (values) => {
       values.employerId =4 ;
       jobAdService.add(values).then((result) => console.log(result.data.data));
-      alert("İş ilanı eklendi personelin onayı ardından listelenecektir");
+      toast.warning("İş ilanı eklendi personelin onayı ardından listelenecektir");
       console.log(values)
-      // history.push("/jobads");
+      
       
     }
   });

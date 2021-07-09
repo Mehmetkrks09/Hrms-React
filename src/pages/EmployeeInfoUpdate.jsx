@@ -3,7 +3,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { Button, Input, Card, Form } from "semantic-ui-react";
 import EmployeeService from "../Services/employeeService";
-
+import { toast } from 'react-toastify';
 
 
 
@@ -43,7 +43,7 @@ export default function EmployeeInfoUpdate() {
     values.id="26";
     
        employeeService.putEmployee(values).then((result) => console.log(result.data.data));
-      alert("Employee Has Been Updated");
+      toast.success("Employee Has Been Updated");
       console.log(values)
       
       

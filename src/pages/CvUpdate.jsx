@@ -7,6 +7,7 @@ import DepartmentService from "../Services/departmentService";
 import ForeignLanguageService from "../Services/foreignLanguageService";
 import SchoolService from "../Services/schoolService";
 import JobExperienceService from "../Services/jobExperienceService";
+import { toast } from 'react-toastify';
 
 
 
@@ -49,7 +50,7 @@ export default function CvAdd() {
     values.jobSeekerId="7";
     values.photo="photo"
       cvService.UpdateCv(values).then((result) => console.log(result.data.data));
-      alert("Cv Has Been Updated");
+      toast.success("Cv Has Been Updated");
       console.log(values)
       
       
