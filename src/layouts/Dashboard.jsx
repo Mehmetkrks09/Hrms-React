@@ -22,6 +22,7 @@ import EmployerList from "../pages/EmployerList";
 import FavoriteAdList from "../pages/FavoriteAdList";
 import EmployeeList from "../pages/EmployeeList";
 import PhotoUpdate from "../pages/PhotoUpdate";
+import CvList from "../pages/CvList";
 
 export default function Dashboard() {
   return (
@@ -32,15 +33,19 @@ export default function Dashboard() {
             <Categories />
           </Grid.Column>
           <Grid.Column width={12}>
-          <Route exact path="/employeeList" component={EmployeeList} />
-          <Route exact path="/photoUpdate" component={PhotoUpdate} />
-                 <Route exact path="/favoriteList" component={FavoriteAdList} />
-               <Route exact path="/employerList" component={EmployerList} />
-             < Route exact path={"/employeeUpdate"} component={EmployeeInfoUpdate} />
-             <Route exact path={"/advertisement"} component={JobAdvertisementList} />
-             <Route exact path={"/employerUpdate"} component={EmployerUpdate} />
+            <Route exact path="/employeeList" component={EmployeeList} />
+            <Route exact path="/photoUpdate" component={PhotoUpdate} />
+            <Route exact path="/favoriteList" component={FavoriteAdList} />
+            <Route exact path="/employerList" component={EmployerList} />
+            <Route
+              exact
+              path={"/employeeUpdate"}
+              component={EmployeeInfoUpdate} />
+            <Route exact path={"/advertisement"}component={JobAdvertisementList} />
+            <Route exact path={"/employerUpdate"} component={EmployerUpdate} />
             <Route exact path={"/emp"} component={EmployeeInfoUpdate} />
             <Route exact path={"/cvAdd"} component={CvAdd} />
+            <Route exact path={"/cvlist"} component={CvList} />
             <Route exact path={"/cvUpdate"} component={CvUpdate} />
             <Route exact path={"/jobList"} component={JobList} />
             <Route exact path={"/jobAdd"} component={JobAd} />

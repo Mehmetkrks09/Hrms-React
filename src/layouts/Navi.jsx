@@ -30,9 +30,7 @@ export default function Navi() {
            Ana Sayfa 
             
           </Menu.Item>
-          {/* <Menu.Item>
-            <Favorites/>
-          </Menu.Item> */}
+  
           <Menu.Item name="home" />
           <Menu.Item name="messages" />
           <Menu.Menu position="right">

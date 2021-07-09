@@ -14,7 +14,7 @@ import DepartmentService from "../Services/departmentService";
 import ForeignLanguageService from "../Services/foreignLanguageService";
 import SchoolService from "../Services/schoolService";
 import JobExperienceService from "../Services/jobExperienceService";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function CvAdd() {
   let cvService = new CvService();
@@ -46,9 +46,9 @@ export default function CvAdd() {
     validationSchema: CvUpdateSchema,
     onSubmit: (values) => {
       values.jobSeekerId = "7";
-values.cvId="9"
+      values.cvId = "9";
       cvService.postCv(values).then((result) => console.log(result.data.data));
-  toast.success("Cv Has Been Added")
+      toast.success("Cv Has Been Added");
       console.log(values.photo);
       cvService.postCvPhoto(values.photo);
     },
@@ -103,41 +103,13 @@ values.cvId="9"
   const handleChangeSemantic = (value, fieldName) => {
     formik.setFieldValue(fieldName, value);
   };
-  const fileSelectorHandler=event=>{
-    console.log(event.target.files[0]);
-  }
-  const uploadFile=()=>{
-
-    const fd= new FormData();
-    fd.append('image',this.fileSelectorHandler.files)
-
-  }
 
   return (
     <div>
       <Card fluid>
-        <Card.Content header="Cv Güncelle" />
+        <Card.Content header="Cv Ekle" />
         <Card.Content>
           <Form onSubmit={formik.handleSubmit}>
-            <Form.Field>
-              <label>Photo </label>
-              <Input
-                type="file"
-                name="photo"
-                id="photo"
-                onChange={
-                  fileSelectorHandler
-                }
-                required
-                hidden
-              ></Input>
-              {formik.errors.photo && formik.touched.photo && (
-                <div className={"ui pointing red basic label"}>
-                  {formik.errors.photo}
-                </div>
-              )}
-            </Form.Field>
-
             <Form.Field style={{ marginBottom: "1rem" }}>
               <label>Bölümler</label>
               <Dropdown
@@ -283,7 +255,6 @@ values.cvId="9"
               )}
             </Form.Field>
             <Button
-            onClick={uploadFile}
               content="Güncelle"
               labelPosition="right"
               icon="add"
